@@ -1,0 +1,7 @@
+.eventsNoticeList:hover{
+    background-color: white;
+}
+
+.eventsNoticeList a:hover{
+    color: #0a58ca;
+}

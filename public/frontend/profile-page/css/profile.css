@@ -1,0 +1,15 @@
+.info-title{
+    font-weight: bold;
+}
+
+.info-details{
+    border-bottom: 1px solid lightgrey;
+}
+
+.profile-picture{
+    width: 255px !important;
+    height: 220px !important;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
