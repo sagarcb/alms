@@ -91,7 +91,7 @@ Route::prefix('admin')->middleware('superAdminLogin')->namespace('SuperAdmin')->
     //Program Routing Ends
 
     //Admin logout
-    Route::get('/logout','SuperAdminController@logout')->name('admin.logout');
+    Route::get('/sadmin/logout','SuperAdminController@logout')->name('admin.logout');
 
 });
 
@@ -103,7 +103,7 @@ Route::prefix('deptadmin')->namespace('DeptAdmin')->group(function (){
 
     Route::middleware('deptAdminLogin')->group(function (){
         Route::get('/','DeptAdminController@index')->name('deptadmin.dashboard');
-        Route::get('/sign/logout','DeptAdminController@logout')->name('deptadmin.logout');
+        Route::get('/dadmin/logout','DeptAdminLoginController@logout')->name('deptadmin.logout');
 
         //Events CRUD ROUTES
         Route::prefix('event')->group(function (){

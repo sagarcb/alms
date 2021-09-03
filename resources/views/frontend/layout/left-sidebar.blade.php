@@ -4,7 +4,8 @@
         <ul>
 {{--            <li class="colorlib-active"><a href="index-2.html">Home</a></li>--}}
             <li><a href="{{route('alumni.profile',session('alumni_id'))}}">
-                    <img src="{{asset('/frontend/pro-image/pro-thumbnail.png')}}" style="border-radius: 50%;" alt="" height="30px">
+                    <img src="{{isset($profilePic->photo_link) ? asset('/frontend/pro-image/'.$profilePic->photo_link) : asset('/frontend/pro-image/pro-thumbnail.png')}}"
+                         style="border-radius: 50%;" alt="" height="40px" width="40px">
                     {{$alumniBasic->name}}
                 </a></li>
             <li>

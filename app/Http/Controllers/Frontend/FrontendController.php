@@ -18,6 +18,7 @@ class FrontendController extends Controller
         $events = Event::where('dept_info_id',$alumniBasic->dept_info_id)->latest()->take(3)->get();
         $noticesCount = Notice::where('dept_info_id',$alumniBasic->dept_info_id)->count();
         $notices = Notice::where('dept_info_id',$alumniBasic->dept_info_id)->latest()->take(3)->get();
+
         return view('frontend.index',
             compact('alumniBasic','eventsCount','events','notices','noticesCount'));
     }

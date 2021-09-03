@@ -2930,7 +2930,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem; }
+  margin-bottom: 0.5rem; }
 
 address {
   margin-bottom: 1rem;
@@ -4150,7 +4150,7 @@ button.bg-light:focus {
   margin-right: 1.5rem !important; }
 
 .mb-4 {
-  margin-bottom: 1.5rem !important; }
+  margin-bottom: 0.5rem !important; }
 
 .mt-5 {
   margin-top: 3rem !important; }
@@ -4221,9 +4221,6 @@ button.bg-light:focus {
 @media (min-width: 768px) {
   .pt-md-0 {
     padding-top: 0 !important; }
-  .pt-md-4 {
-    padding-top: 1.5rem !important; }
-  
   .px-md-4 {
     padding-right: 1.5rem !important; }
   .pl-md-4,
@@ -4234,21 +4231,21 @@ button.bg-light:focus {
   .pr-md-5,
   .px-md-5 {
     padding-right: 3rem !important; }
-  
+
   .px-md-5 {
     padding-left: 3rem !important; } }
 
 @media (min-width: 1200px) {
-  
+
   .py-xl-3 {
     padding-top: 1rem !important; }
-  
+
   .py-xl-3 {
     padding-bottom: 1rem !important; }
-  
+
   .px-xl-4 {
     padding-right: 1.5rem !important; }
-  
+
   .px-xl-4 {
     padding-left: 1.5rem !important; } }
 
@@ -4691,7 +4688,7 @@ h1, h2, h3, h4, h5,
     position: relative;
     z-index: 0;
     width: 100%;
-    width: calc(100% - 150px); }
+    width: calc(120% - 150px); }
     @media (max-width: 767.98px) {
       .blog-entry .text {
         width: 100%;

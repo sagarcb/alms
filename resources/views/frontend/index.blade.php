@@ -3,18 +3,29 @@
 @section('main-content')
     <div class="row pt-md-4">
         <div class="col-md-12">
-            <div class="blog-entry ftco-animate d-md-flex">
-                <a href="single.html" class="img img-2" style="background-image:url({{asset('/frontend/assets/images/ximage_1.jpg.pagespeed.ic.HkfdBUS8CU.jpg')}})"></a>
+            <div class="blog-entry ftco-animate d-md-flex mt-2">
+{{--                <a href="single.html" class="img img-2" style="background-image:url({{asset('/frontend/assets/images/ximage_1.jpg.pagespeed.ic.HkfdBUS8CU.jpg')}});--}}
+{{--                    height: 40px; width: 40px"></a>--}}
+{{--                <div class="text text-2 pl-md-4">--}}
+{{--                    <input type="text" class="ml-1">--}}
+{{--                </div>--}}
+                <div class="sticky-top" style="margin-left: auto; margin-right: auto;">
+                    <form action="">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="What's on your mind" rows="2" cols="70"></textarea>
+                        <button class="btn btn-primary mt-1" style="margin-top: 5px">Post</button>
+                    </form>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="blog-entry ftco-animate d-md-flex" >
+                <a href="single.html" class="img img-2" style="background-image:url({{asset('/frontend/assets/images/ximage_1.jpg.pagespeed.ic.HkfdBUS8CU.jpg')}});
+                    height: 40px; width: 40px"></a>
                 <div class="text text-2 pl-md-4">
-                    <h3 class="mb-2"><a href="single.html">A Loving Heart is the Truest Wisdom</a></h3>
-                    <div class="meta-wrap">
-                        <p class="meta">
-                            <span><i class="icon-calendar mr-2"></i>June 28, 2019</span>
-                            <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>
-                            <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-                        </p>
-                    </div>
-                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                    <h6 class="mb-1"><a href="single.html">A Loving Heart is the Truest Wisdom</a></h6>
+                    <span><i class="icon-calendar mr-1"></i>June 28, 2019</span>
+                    <p class="mb-1">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
                     <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                 </div>
             </div>

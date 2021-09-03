@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Model\AlumniBasicInfo;
+use App\Model\AlumniPersonalInfo;
 use App\Model\DeptAdmin;
 use App\Model\Event;
 use App\Model\Notice;
@@ -41,8 +42,10 @@ class AppServiceProvider extends ServiceProvider
             $events = Event::where('dept_info_id',$alumniBasic->dept_info_id)->latest()->take(3)->get();
             $noticesCount = Notice::where('dept_info_id',$alumniBasic->dept_info_id)->count();
             $notices = Notice::where('dept_info_id',$alumniBasic->dept_info_id)->latest()->take(3)->get();
+            $profilePic = AlumniPersonalInfo::select('photo_link')->where('alumni_id',$alumniBasic->alumni_id)->first();
             $view->with('alumniBasic',$alumniBasic)->with('eventsCount',$eventsCount)->with('events',$events)
-                    ->with('noticesCount',$noticesCount)->with('notices',$notices);
+                    ->with('noticesCount',$noticesCount)->with('notices',$notices)->with('profilePic',$profilePic);
+
         });
     }
 }
