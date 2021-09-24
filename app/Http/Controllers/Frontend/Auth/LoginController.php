@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\EmailVerification;
+use App\Mail\PasswordReset;
 use App\Model\AlumniAcademicInfo;
 use App\Model\AlumniBasicInfo;
 use App\Model\AlumniJobInfo;
@@ -136,6 +137,61 @@ class LoginController extends Controller
         $alumni->active_status = 0;
         $alumni->save();
         return redirect()->route('alumni.login');
+    }
+
+    public function enterEmailPage()
+    {
+        return view('frontend.auth.enter-email');
+    }
+
+    public function verifyEmail(Request $request)
+    {
+        $alumni = AlumniBasicInfo::where('email_id',$request->email)->first();
+        $code = '';
+        if (!isset($alumni->email_id)){
+            return back()->with('message','This email is not belongs to you');
+        }
+        $code = rand(10000,99999);
+        $details = array("name" => $alumni->name, "code" => $code);
+        session()->put('password_reset_verification_code',$code);
+        session()->put('alumni_passwordreset_id',$alumni->id);
+        Mail::to($alumni->email_id)->send(new PasswordReset($details));
+        return redirect()->route('enter.verificationCode');
+    }
+
+    public function verifyCodePage()
+    {
+        return view('frontend.auth.passwordreset-verify-email');
+    }
+
+    public function verifyCode(Request $request)
+    {
+        if ($request->verification_code != session('password_reset_verification_code')){
+            return back()->with("message','Your verification code didn't match");
+        }
+        session()->forget('password_reset_verification_code');
+        return redirect()->route('reset.password');
+    }
+
+    public function resetPasswordPage()
+    {
+        return view('frontend.auth.password-reset');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $this->validate($request,[
+           'confirm_password' => 'required',
+           'password' => 'required|min:6'
+        ]);
+        if ($request->password != $request->confirm_password){
+            return back()->with('message',"Confirm password didn't match with password");
+        }
+        $alumni = AlumniBasicInfo::find(session('alumni_passwordreset_id'));
+        $alumni->password = Hash::make($request->password);
+        $alumni->save();
+        session()->forget('alumni_passwordreset_id');
+        return redirect()->route('alumni.login')->with('success','Password reset successfully! Try to login');
     }
 
 }

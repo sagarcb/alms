@@ -7,6 +7,7 @@ use App\Model\AlumniAcademicInfo;
 use App\Model\AlumniBasicInfo;
 use App\Model\AlumniJobInfo;
 use App\Model\AlumniPersonalInfo;
+use App\Model\Post;
 use Illuminate\Http\Request;
 
 class AlumniProfileController extends Controller
@@ -16,8 +17,9 @@ class AlumniProfileController extends Controller
         $alumniPersonal = AlumniPersonalInfo::where('alumni_id',$alumni->alumni_id)->first();
         $alumniAcademic = AlumniAcademicInfo::where('alumni_id',$alumni->alumni_id)->first();
         $alumniJob = AlumniJobInfo::where('alumni_id',$alumni->alumni_id)->first();
+        $alumniPost = Post::where('alumni_id',$alumni->alumni_id)->get();
         return view('frontend.profile.my-profile',
-            compact('alumni','alumniPersonal','alumniAcademic','alumniJob'));
+            compact('alumni','alumniPersonal','alumniAcademic','alumniJob','alumniPost'));
     }
 
     //Basic info ajax
@@ -28,27 +30,32 @@ class AlumniProfileController extends Controller
 
     public function updateBasicInfo(Request $request, AlumniBasicInfo $alumni)
     {
-//        if ($alumni->alumni_id != $request->alumni_id){
-//            //updating value in job info table
-//            $alumniJob = AlumniJobInfo::where('alumni_id',$alumni->alumni_id)->first();
-//            $alumniJob->alumni_id = $request->alumni_id;
-//            $alumniJob->save();
-//
-//            //updating value in personal info table
-//            $alumniPersonal = AlumniPersonalInfo::where('alumni_id',$alumni->alumni_id)->first();
-//            $alumniPersonal->alumni_id = $request->alumni_id;
-//            $alumniPersonal->save();
-//
-//            //updating value in academic info table
-//            $alumniAcademic = AlumniAcademicInfo::where('alumni_id',$alumni->alumni_id)->first();
-//            $alumniAcademic->alumni_id = $request->alumni_id;
-//            $alumniAcademic->save();
-//        }
+
         $alumni->name = $request->name;
-        $alumni->email_id = $request->email_id;
         $alumni->mobile_number = $request->mobile_number;
+
+        $message = '';
+        $f = 0;
+
+        if ($request->flag == 1){
+            $uniqueEmail = AlumniBasicInfo::where('email_id',$request->email_id)->first();
+            if (!$uniqueEmail){
+                $alumni->approve_status = 0;
+                $message = 'Your basic information successfully updated!!!';
+                session()->forget('alumni_login_status');
+                $alumni->active_status = 0;
+                $alumni->save();
+            }else{
+                $message = "You can't use this email.";
+                $f = 1;
+            }
+
+        }
         $alumni->save();
-        return response()->json('Alumni Basic Information Successfully Updated!!!');
+        return response()->json([
+            'message' => $message,
+            'f' => $f
+        ]);
     }
 
     //personal info ajax
@@ -123,5 +130,36 @@ class AlumniProfileController extends Controller
         }
         $alumni->save();
         return response()->json($alumni,200);
+    }
+
+    //Show post details ajax
+    public function postDetailsAjax(Post $post)
+    {
+        return response()->json($post,200);
+    }
+
+    //update post ajax
+    public function updatePost(Request $request, Post $post)
+    {
+        $post->post = $request->post;
+        $post->save();
+        return response()->json($post,200);
+    }
+
+    public function deletePost(Post $post)
+    {
+        $post->delete();
+        return response()->json('Post Successfully Deleted');
+    }
+
+    public function otherProfile(Post $post)
+    {
+        $alumni = AlumniBasicInfo::where('alumni_id',$post->alumni_id)->first();
+        $alumniPersonal = AlumniPersonalInfo::where('alumni_id',$post->alumni_id)->first();
+        $alumniAcademic = AlumniAcademicInfo::where('alumni_id',$post->alumni_id)->first();
+        $alumniJob = AlumniJobInfo::where('alumni_id',$post->alumni_id)->first();
+        $alumniPost = Post::where('alumni_id',$post->alumni_id)->get();
+        return view('frontend.profile.others-profile',
+            compact('alumni','alumniPersonal','alumniAcademic','alumniJob','alumniPost'));
     }
 }

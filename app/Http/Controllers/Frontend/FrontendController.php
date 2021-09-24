@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\AlumniBasicInfo;
 use App\Model\Event;
 use App\Model\Notice;
+use App\Model\Post;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -18,9 +19,10 @@ class FrontendController extends Controller
         $events = Event::where('dept_info_id',$alumniBasic->dept_info_id)->latest()->take(3)->get();
         $noticesCount = Notice::where('dept_info_id',$alumniBasic->dept_info_id)->count();
         $notices = Notice::where('dept_info_id',$alumniBasic->dept_info_id)->latest()->take(3)->get();
-
+        $posts = Post::with('alumniBasicInfo','alumniPersonalInfo')
+            ->where('dept_info_id',$alumniBasic->dept_info_id)->latest()->paginate(10);
         return view('frontend.index',
-            compact('alumniBasic','eventsCount','events','notices','noticesCount'));
+            compact('alumniBasic','eventsCount','events','notices','noticesCount','posts'));
     }
 
     //Show the events list
@@ -51,4 +53,24 @@ class FrontendController extends Controller
     {
         return view('frontend.notices.notice-details',compact('notice'));
     }
+
+    //Store alumni Post
+    public function storePost(Request $request, AlumniBasicInfo $alumni)
+    {
+        $post = new Post();
+        $post->post = $request->post;
+        $post->dept_info_id = $alumni->dept_info_id;
+        $post->alumni_id = $alumni->alumni_id;
+        $post->save();
+
+        return redirect()->back();
+    }
+
+    //Show post details
+    public function postDetails(Post $post)
+    {
+        return view('frontend.posts.post-details',compact('post'));
+    }
+
+
 }

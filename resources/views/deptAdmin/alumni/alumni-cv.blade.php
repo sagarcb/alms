@@ -4,7 +4,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Alumni Approved List</h3>
+                <h3>Alumni CV List</h3>
                 {{--                <p class="text-subtitle text-muted">For user to check they list</p>--}}
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -12,7 +12,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('deptadmin.dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Manage Alumni</li>
-                        <li class="breadcrumb-item" aria-current="page"><a href="{{route('alumni.approved.view')}}">List</a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a href="{{route('alumni.cv.list')}}">CV List</a></li>
                     </ol>
                 </nav>
             </div>
@@ -41,7 +41,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div>
-                    All Alumni Account List
+                    Alumni CV List
                 </div>
             </div>
             <div class="card-body">
@@ -50,30 +50,25 @@
                     <tr>
                         <th>Name</th>
                         <th>Alumni ID</th>
-                        <th>Batch</th>
-                        <th>Email</th>
-                        <th>Mobile Number</th>
-                        <th>Approve Status</th>
+                        <th>CV</th>
+                        <th>Download</th>
                     </tr>
                     </thead>
                     <tbody>
                     @forelse($alumnis as $row)
+                        @if(isset($row->alumniJobInfo->cv_link))
                         <tr>
                             <td>{{$row->name}}</td>
                             <td>{{$row->alumni_id}}</td>
-                            <td>{{isset($row->alumniAcademicInfo->batch) ? $row->alumniAcademicInfo->batch : ''}}</td>
-                            <td>{{$row->email_id}}</td>
-                            <td>{{$row->mobile_number}}</td>
+                            <td>{{$row->alumniJobInfo->cv_link}}</td>
                             <td>
-                                <select data-id="{{$row->id}}" class="form-select" id="basicSelect" style="color: {{$row->approve_status == 1 ? 'green' : 'red'}}">
-                                    <option value="1" {{$row->approve_status == 1 ? 'selected' : ''}}>Approve</option>
-                                    <option value="0" {{$row->approve_status == 0 ? 'selected' : ''}}>DisApprove</option>
-                                </select>
+                                <a href="{{route('alumni.cv.download',$row->alumni_id)}}"><i class="fa fa-download"></i></a>
                             </td>
                         </tr>
+                        @endif
                     @empty
                         <tr>
-                            <td class="text-center" colspan="5">No Alumni Account Registered!!</td>
+                            <td class="text-center" colspan="5">No Alumni Account Request!!</td>
                         </tr>
                     @endforelse
                     </tbody>

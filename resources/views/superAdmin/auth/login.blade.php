@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Admin Login</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('/frontend/login/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('/frontend/login/assets/vendors/css/vendor.bundle.base.css')}}">
@@ -16,7 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('/frontend/login/assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{asset('/frontend/login/assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="https://play-lh.googleusercontent.com/mPQOxyJTmui7TNYFBCX22ThSj8Svdjo--5f8koMp1m0thBr_NYDBBwY1XISCaqkv1y4" />
 </head>
 <body>
 <div class="container-scroller">

@@ -3,9 +3,10 @@
 
 <!-- Mirrored from preview.colorlib.com/theme/andrea/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Jul 2021 14:55:02 GMT -->
 <head>
-    <title>Andrea - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Alumni</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="https://play-lh.googleusercontent.com/mPQOxyJTmui7TNYFBCX22ThSj8Svdjo--5f8koMp1m0thBr_NYDBBwY1XISCaqkv1y4" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap" rel="stylesheet">

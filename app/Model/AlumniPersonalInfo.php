@@ -25,4 +25,9 @@ class AlumniPersonalInfo extends Model
     {
         return $this->belongsTo(AlumniBasicInfo::class,'alumni_id','alumni_id');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class,'alumni_id','alumni_id');
+    }
 }

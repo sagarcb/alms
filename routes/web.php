@@ -25,6 +25,15 @@ Route::namespace('Frontend')->group(function (){
     Route::post('/email-verify','Auth\LoginController@storeVerifiedAlumni');
     //Alumni Registration ends
 
+    //alumni password reset
+    Route::get('/enter-email','Auth\LoginController@enterEmailPage')->name('email.enterEmail');
+    Route::post('/enter-email','Auth\LoginController@verifyEmail');
+    Route::get('/verification-code','Auth\LoginController@verifyCodePage')->name('enter.verificationCode');
+    Route::post('/verification-code','Auth\LoginController@verifyCode');
+    Route::get('/reset-password','Auth\LoginController@resetPasswordPage')->name('reset.password');
+    Route::post('/reset-password','Auth\LoginController@resetPassword');
+    //Route::post('/reset-password','Auth\LoginController@rest')
+
     Route::middleware('alumni')->group(function (){
         Route::get('/','FrontendController@index')->name('frontend.home');
         Route::get('/{alumni}/profile','AlumniProfileController@index')->name('alumni.profile');
@@ -49,6 +58,19 @@ Route::namespace('Frontend')->group(function (){
         //Alumni Job info ajax request
         Route::get('/{alumni_id}/job-details','AlumniProfileController@jobInfoDetails');
         Route::post('/{alumni}/job-details','AlumniProfileController@jobInfoUpdate');
+
+        //Alumni Post Route
+        Route::post('/{alumni}/store-post','FrontendController@storePost')->name('post.store');
+        Route::get('/{post}/post-details','FrontendController@postDetails')->name('post.details');
+        Route::patch('/{post}/post-update','FrontendController@updatePost')->name('post.update');
+
+        //alumni post ajax route
+        Route::get('/{post}/post-details-ajax','AlumniProfileController@postDetailsAjax');
+        Route::post('/{post}/post-update','AlumniProfileController@updatePost');
+        Route::delete('/{post}/delete-post','AlumniProfileController@deletePost');
+
+        //alumni others profile
+        Route::get('/{post}/otherprofile','AlumniProfileController@otherProfile')->name('other.profile');
     });
 });
 //Frontend Routing Ends
@@ -129,10 +151,18 @@ Route::prefix('deptadmin')->namespace('DeptAdmin')->group(function (){
         Route::prefix('alumni')->group(function (){
             Route::get('/request/list','AlumniController@newRegister')->name('alumni.request.view');
             Route::get('/list','AlumniController@approvedAlumni')->name('alumni.approved.view');
+            Route::get('/cv/list','AlumniController@cvList')->name('alumni.cv.list');
+            Route::get('/{alumni}/cv/download','AlumniController@cvDownload')->name('alumni.cv.download');
 
             //Alumni Approval status update
             Route::post('/{alumni}/approve-status-update','AlumniController@approveStatusUpdate');
         });
+
+        Route::get('/alumni/all-posts','AlumniController@alumniposts')->name('alumni.posts.list');
+        Route::get('/alumni/{post}/delete','AlumniController@deletePost')->name('alumni.post.delete');
+
+        Route::get('/{deptAdmin}/profile','DeptAdminController@profile')->name('deptadmin.profile');
+        Route::post('/{deptAdmin}/updateProfile','DeptAdminController@updateProfile');
 
     });
 });

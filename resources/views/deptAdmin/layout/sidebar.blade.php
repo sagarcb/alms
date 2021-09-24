@@ -51,6 +51,12 @@
                 <li class="submenu-item ">
                     <a href="{{route('alumni.approved.view')}}">Alumni Approved List</a>
                 </li>
+                <li class="submenu-item">
+                    <a href="{{route('alumni.cv.list')}}">Alumni CV</a>
+                </li>
+                <li class="submenu-item">
+                    <a href="{{route('alumni.posts.list')}}">Alumni Posts</a>
+                </li>
             </ul>
         </li>
 

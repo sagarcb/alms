@@ -24,9 +24,7 @@
                 <img src="{{$alumniPersonal->photo_link ? asset('/frontend/pro-image/'.$alumniPersonal->photo_link) :
                     asset('/frontend/pro-image/pro-thumbnail.png')}}" class="card-img-top profile-picture" alt="..." id="profilePicture">
                 <div class="card-body">
-                    <h5 class="card-title"><span id="nameText">{{$alumni->name}}</span>
-                        <a href="#" data-id="{{$alumni->id}}" data-bs-toggle="modal"
-                        data-bs-target="#basic-modal" id="editBasicInfoBtn"><i class="fa fa-edit"></i></a></h5>
+                    <h5 class="card-title"><span id="nameText">{{$alumni->name}}</span></h5>
                 </div>
                 <div>
                     <a href="{{url('/')}}">
@@ -86,18 +84,14 @@
                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Personal Info</button>
                     <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Academic Info</button>
                     <button class="nav-link" id="nav-post-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Job Info</button>
-                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-post" type="button" role="tab" aria-controls="nav-post" aria-selected="false">My Posts</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-post" type="button" role="tab" aria-controls="nav-post" aria-selected="false">Posts</button>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="card" style="padding: 2px">
-                        <div class="card-header d-flex justify-content-between">
+                        <div class="card-header">
                             <div>Personal Information</div>
-                            <div>
-                                <a class="#" data-id="{{$alumni->alumni_id}}" data-bs-toggle="modal"
-                                   data-bs-target="#personal-modal" id="editPersonalInfoBtn"><i class="fa fa-edit"></i></a>
-                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -187,12 +181,9 @@
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="card" style="padding: 2px">
-                        <div class="card-header d-flex justify-content-between">
+                        <div class="card-header">
                             <div>Academic Information</div>
-                            <div>
-                                <a class="#" data-id="{{$alumni->alumni_id}}" data-bs-toggle="modal"
-                                   data-bs-target="#academic-modal" id="editAcademicInfoBtn"><i class="fa fa-edit"></i></a>
-                            </div>
+
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -224,13 +215,9 @@
                 </div>
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="card" style="padding: 2px">
-                        <div class="card-header d-flex justify-content-between">
+                        <div class="card-header">
                             <div>
                                 Job Information
-                            </div>
-                            <div>
-                                <a class="#" data-id="{{$alumni->alumni_id}}" data-bs-toggle="modal"
-                                   data-bs-target="#job-modal" id="editJobInfoBtn"><i class="fa fa-edit"></i></a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -274,11 +261,7 @@
                                     <div data-id="{{$post->id}}" class="card">
                                         <div class="card-body">
                                             <h6 class="card-title"><i class="fa fa-calendar"></i> {{date('d-M-Y',strtotime($post->created_at))}}</h6>
-                                            <p data-id="{{$post->id}}" class="card-text">{{substr($post->post,0,120)}} {{strlen($post->post) > 120 ? '.............': ''}}</p>
-                                            <a href="" data-id="{{$post->id}}" class="post_edit_btn" data-toggle="tooltip" data-placement="top" title="Edit Post" data-bs-toggle="modal"
-                                               data-bs-target="#post-modal">
-                                                <button class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></button></a>
-                                            <a href="" class="post_delete_btn" data-id="{{$post->id}}" data-toggle="tooltip" data-placement="top" title="Delete Post"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></a>
+                                            <p data-id="{{$post->id}}" class="card-text">{{$post->post}}</p>
                                         </div>
                                     </div>
                                 @empty
@@ -295,20 +278,6 @@
     {{--Main contents ends--}}
 </div>
 
-{{--basic modal--}}
-@include('frontend.profile.basic-modal')
-
-{{--academic modal--}}
-@include('frontend.profile.academic-modal')
-
-{{--personal modal--}}
-@include('frontend.profile.personal-modal')
-
-{{--job modal--}}
-@include('frontend.profile.job-modal')
-
-{{--Post Modal--}}
-@include('frontend.profile.post-modal')
 
 <script src="{{asset('/frontend/profile-page/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('/frontend/profile-page/bootstrap/bootstrap.bundle.min.js')}}"></script>

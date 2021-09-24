@@ -45,4 +45,9 @@ class AlumniBasicInfo extends Model
     {
         return $this->belongsTo(ProgramInfo::class,'program_info_id','id');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class,'alumni_id','alumni_id');
+    }
 }
